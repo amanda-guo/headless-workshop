@@ -104,7 +104,10 @@ export const getStaticPaths = async () => {
 
   return {
     // TODO: Map the paths return from Sanity into the correct shape that Next.js is expecting
-    paths: [],
+    paths:
+      paths?.map((slug) => ({
+        params: { slug: `${slug}`.replace('/', '').split('/') },
+      })) || [],
     fallback: false,
   }
 }
